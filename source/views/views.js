@@ -85,7 +85,7 @@ enyo.kind({
 			var taxResult = this.roundToTwo(result*taxRate*numPeople);
 			var tipResult = (cardValue - this.roundToTwo(result * numPeople + taxResult));
 			
-			this.$.resultsDialog.show(result, taxResult, tipResult);
+			this.$.resultsDialog.show(result, taxResult, tipResult, numPeople);
 		}
 	},
 
@@ -139,8 +139,8 @@ enyo.kind({
 		{kind: "onyx.Button", classes: "onyx-affirmative", content: "Done", ontap: "doneButtonTapped", style: "width: 100%; font-size: 18px; font-weight: 300"}
 	],
 
-	show: function(result, taxResult, tipResult){
-		this.$.totalField.setContent("$" + result.toFixed(2) * 2);
+	show: function(result, taxResult, tipResult, numPeople){
+		this.$.totalField.setContent("$" + result.toFixed(2) * numPeople);
 		this.$.resultField.setContent("$" + result.toFixed(2));
 		this.$.taxResultField.setContent("$" + taxResult.toFixed(2));
 		this.$.tipResultField.setContent("$" + tipResult.toFixed(2));

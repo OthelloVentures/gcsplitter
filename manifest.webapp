@@ -3,7 +3,7 @@
     "installs_allowed_from": [
         "*"
     ],
-    "version": "1.0.0",
+    "version": "1.0.1",
     "name": "Gift Card Splitter",
     "pkgName": "com.othelloventures.giftcardsplitter",
     "description": "Have you ever received a gift card, and wanted to visit the restaurant without spending any extra money? This app will help you calculate how much you can spend on food and drink, while making sure to keep enough back for the tax and tip!",
