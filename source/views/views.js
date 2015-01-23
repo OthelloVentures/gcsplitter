@@ -12,11 +12,10 @@ enyo.kind({
 	numberOfPeopleInputValid: false,
 	taxRateInputValid: false,
 	tipPercentageInputValid: false,
-	style: "font-family: 'Fira Sans', sans-serif;",
 
 	components:[
-		{kind: "onyx.Toolbar", content: "Gift Card Splitter", style: "padding-left: 25px; background-color: #E66000; font-family: 'Fira Sans', sans-serif; border: none;"},
-		{name: "mainScroller", kind: "enyo.Scroller", fit: true, style: "background-color: #4D4E53; color: white; padding: 15px", components: [
+		{name: "headerToolbar", kind: "onyx.Toolbar", content: "Gift Card Splitter", style: "padding-left: 25px; border: none;"},
+		{name: "mainScroller", kind: "enyo.Scroller", fit: true, style: "padding: 15px", components: [
 			{kind: "FittableRows", fit: true, components: [
 				{content:"Value of Gift Card"},
 				{kind: "onyx.InputDecorator", style: "width: 100%; margin-bottom: 10px", components: [
@@ -37,7 +36,7 @@ enyo.kind({
 					{name: "tipPercentageInput", kind: "onyx.Input", oninput: "validateInput", onfocus: "checkFocus", onblur: "checkBlur"},
 					{content:"&nbsp;%", allowHtml: true}
 				]},
-				{name: "calculateButton", kind: "onyx.Button", classes: "onyx-affirmative", content: "Calculate", disabled: true, style: "width: 100%; font-size: 22px; font-weight: 300; margin-bottom: 15px;", ontap: "calculateButtonTapped"},
+				{name: "calculateButton", kind: "onyx.Button", content: "Calculate", disabled: true, style: "width: 100%; font-size: 22px; font-weight: 300; margin-bottom: 15px;", ontap: "calculateButtonTapped"},
 				{name: "resultsDialog", kind: "gcsplit.resultsDialog"}
 			]}
 		]}
@@ -91,6 +90,21 @@ enyo.kind({
 
 	rendered: function(){
 		this.inherited(arguments);
+		//Apply per-platform styles
+		if (enyo.platform.tizen)
+		{
+			this.addClass("tizen-fonts");
+			this.$.headerToolbar.addClass("tizen-fonts tizen-header-colors");
+			this.$.mainScroller.addClass("tizen-colors");
+			this.$.calculateButton.addClass("tizen-buttons");
+		}
+		else
+		{
+			this.addClass("firefox-fonts");
+			this.$.headerToolbar.addClass("firefox-fonts firefox-header-colors");
+			this.$.mainScroller.addClass("firefox-colors");
+			this.$.calculateButton.addClass("onyx-affirmative");
+		}
 
 		//Calculate Window Width
 		var windowWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
@@ -103,19 +117,25 @@ enyo.kind({
 
 	//utility
     checkFocus: function(source, event) {
-		source.parent.applyStyle("color", "black");
-		source.applyStyle("color", "black");
+		if(!enyo.platform.tizen)
+		{
+			source.parent.applyStyle("color", "black");
+			source.applyStyle("color", "black");
+		}
 	},
 
 	checkBlur: function(source, event) {
-		source.parent.applyStyle("color", "white");
-		source.applyStyle("color", "white");
+		if(!enyo.platform.tizen)
+		{
+			source.parent.applyStyle("color", "white");
+			source.applyStyle("color", "white");
+		}
 	}
 });
 
 enyo.kind({
     name: "gcsplit.resultsDialog",
-    style: "padding: 15px; width: 80%; max-height: 80%; font-family: 'Fira Sans', sans-serif;",
+    style: "padding: 15px; width: 80%; max-height: 80%;",
     kind: "onyx.Popup",
     centered: true,
     modal: true,
@@ -136,10 +156,20 @@ enyo.kind({
 			{content: "The total tax is:"},
 			{name: "taxResultField", style: "font-size: 24px; font-weight: 200; margin-bottom: 10px;"}
 		]},
-		{kind: "onyx.Button", classes: "onyx-affirmative", content: "Done", ontap: "doneButtonTapped", style: "width: 100%; font-size: 18px; font-weight: 300"}
+		{name: "doneButton", kind: "onyx.Button", content: "Done", ontap: "doneButtonTapped", style: "width: 100%; font-size: 18px; font-weight: 300"}
 	],
 
 	show: function(result, taxResult, tipResult, numPeople){
+		if (enyo.platform.tizen)
+		{
+			this.addClass("tizen-fonts tizen-dialog");
+			this.$.doneButton.addClass("tizen-buttons");
+		}
+		else
+		{
+			this.addClass("firefox-fonts");
+			this.$.doneButton.addClass("onyx-affirmative");
+		}
 		this.$.totalField.setContent("$" + result.toFixed(2) * numPeople);
 		this.$.resultField.setContent("$" + result.toFixed(2));
 		this.$.taxResultField.setContent("$" + taxResult.toFixed(2));
