@@ -1,0 +1,12 @@
+<widget id="gcsplitter" 
+  xmlns="http://www.w3.org/ns/widgets" 
+  xmlns:cdv="http://cordova.apache.org/ns/1.0" version="3.0.0">
+  <name>Gift Card Splitter</name>
+  <icon src="icon-128.png"/>
+  <author email="appdev@othelloventures.com" href="http://www.othelloventures.com">Othello Ventures Ltd.</author>
+  <content src="index.html"/>
+  <access origin="*"/>
+  <preference name="Orientation" value="portrait"/>
+  <preference name="ChildBrowser" value="disable"/>
+  <description>Have you ever received a gift card, and wanted to visit the restaurant without spending any extra money? This app will help you calculate how much you can spend on food and drink, while making sure to keep enough back for the tax and tip!</description>
+</widget>
