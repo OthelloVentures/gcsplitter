@@ -98,6 +98,13 @@ enyo.kind({
 			this.$.mainScroller.addClass("tizen-colors");
 			this.$.calculateButton.addClass("tizen-buttons");
 		}
+		else if (enyo.platform.blackberry)
+		{
+			this.addClass("blackberry-fonts");
+			this.$.headerToolbar.addClass("blackberry-fonts blackberry-header-colors");
+			this.$.mainScroller.addClass("blackberry-colors");
+			this.$.calculateButton.addClass("blackberry-buttons");
+		}
 		else
 		{
 			this.addClass("firefox-fonts");
@@ -117,7 +124,7 @@ enyo.kind({
 
 	//utility
     checkFocus: function(source, event) {
-		if(!enyo.platform.tizen)
+		if(!enyo.platform.tizen && !enyo.platform.blackberry)
 		{
 			source.parent.applyStyle("color", "black");
 			source.applyStyle("color", "black");
@@ -125,7 +132,7 @@ enyo.kind({
 	},
 
 	checkBlur: function(source, event) {
-		if(!enyo.platform.tizen)
+		if(!enyo.platform.tizen && !enyo.platform.blackberry)
 		{
 			source.parent.applyStyle("color", "white");
 			source.applyStyle("color", "white");
@@ -164,6 +171,11 @@ enyo.kind({
 		{
 			this.addClass("tizen-fonts tizen-dialog");
 			this.$.doneButton.addClass("tizen-buttons");
+		}
+		else if (enyo.platform.blackberry)
+		{
+			this.addClass("blackberry-fonts blackberry-dialog");
+			this.$.doneButton.addClass("blackberry-buttons");
 		}
 		else
 		{
