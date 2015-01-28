@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://yourdomain/gcsplitter" version="2.0.0" viewmodes="maximized">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://othelloventures.com/gcsplitter" version="3.1.0" viewmodes="maximized">
     <tizen:application id="9fzNDBv6Xc.gcsplitter" package="9fzNDBv6Xc" required_version="2.3"/>
+    <author href="http://www.othelloventures.com" email="support@othelloventures.com">Brent Hunter</author>
     <content src="index.html"/>
     <feature name="http://tizen.org/feature/screen.size.all"/>
-    <icon src="icon-128.png"/>
+    <icon src="icon-117.png" height="117" width="117"/>
     <name>Gift Card Splitter</name>
     <tizen:profile name="mobile"/>
 </widget>

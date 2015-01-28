@@ -42,6 +42,23 @@ enyo.kind({
 		]}
 	],
 
+	create: function(inSender, inEvent) {
+		this.inherited(arguments);
+		enyo.dispatcher.listen(document, "tizenhwkey", enyo.bind(this, function(e) {
+			if (e.keyName == "back")
+			{
+				if (this.$.resultsDialog.getShowing())
+				{
+					this.$.resultsDialog.hide();
+				}
+				else
+				{
+					tizen.application.getCurrentApplication().exit();
+				}
+			}
+		}));
+	},
+
 	validateInput: function(inSender, inEvent) {
 		this[inSender.name + "Valid"] = (inEvent.originator.value && isFinite(inEvent.originator.value) && inEvent.originator.value >= 0);
 		inSender.parent.addRemoveClass("invalid-format", !(inEvent.originator.value && isFinite(inEvent.originator.value) && inEvent.originator.value >= 0));
